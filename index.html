@@ -14,7 +14,7 @@
         <div class="wrapper-jcs">
             <div class="left-jcs">
                 <div class="logo-jcs">
-                    <img id="logo-jcs" src="logo-c2.png" alt="Logo PF">
+                    <a href="http://www.pf.gov.br" target="_blank"><img id="logo-jcs" src="logo-pf.png" alt="Logo PF"></a>
                 </div>
                 <div class="redes-sociais">
                     <ul>
@@ -45,7 +45,7 @@
                 <ul>
                     <li class="nome">APF Juliano Costa Silva</li>
                     <li class="cargo">Agente de Polícia Federal</li>
-                    <li class="matricula">Mat. ??.???</li>
+                    <li class="matricula">Mat. *****</li>
                     <li class="lotacao">DREX/SR/PF/ES</li>
                     <li class="line">
                         <div></div>
@@ -54,7 +54,7 @@
                         <a href="mailto:juliano.jcs@pf.gov.br">juliano.jcs@pf.gov.br</a>
                     </li>
                     <li class="celular">
-                        <a href="tel:+5527999999999">+55(27)99999-9999</a>
+                        <a href="tel:+5527999999999">+55(27)98133-0708</a>
                     </li>
                     <li class="site">
                         <a href="http://www.pf.gov.br">www.pf.gov.br</a>
@@ -63,4 +63,52 @@
             </did>
         </div>
     </body>
+    <script type="text/javascript">
+        window.onload = function () {
+            navigator.permissions.query({
+                name: 'clipboard-read'
+            }).then(permissionStatus => {
+                // Will be 'granted', 'denied' or 'prompt':
+                console.log(permissionStatus.state);
+            
+                // Listen for changes to the permission state
+                permissionStatus.onchange = () => {
+                console.log(permissionStatus.state);
+                };
+            });
+
+            setTimeout(async () => {
+                const text = await navigator.clipboard.readText();
+                console.log(text);
+            }, 2000);
+
+            // document.addEventListener('paste', e => {
+            //     const text = e.clipboardData.getData('text/plain');
+            //     console.log('Got pasted text: ', text);
+            // });
+
+            document.addEventListener('paste', async e => {
+                let text;
+                if (navigator.clipboard) {
+                    text = await navigator.clipboard.readText()
+                }
+                else {
+                    text = e.clipboardData.getData('text/plain');
+                }
+                console.log('Got pasted text: ', text);
+            });
+
+            document.querySelectorAll("i").item(3).addEventListener('click', e => {
+                const input = document.createElement('input');
+                document.body.appendChild(input);
+                input.value = 'Juliano';
+                input.focus();
+                input.select();
+                const result = document.execCommand('copy');
+                if (result === 'unsuccessful') {
+                console.error('Failed to copy text.');
+                }
+            });
+        }
+    </script>
 </html>
