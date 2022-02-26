@@ -34,7 +34,6 @@ a>i:hover {
     margin: 10px;
     /* border: 1px  solid black; */
     padding: 10px;
-    max-width: fit-content;
     min-width: 218px;
 }
 
